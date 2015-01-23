@@ -12,11 +12,17 @@
 ## four functions:
 ##      set (called with makeCacheMatrix$set) -- it stores the "original matrix"
 ##              supplied to makeCacheMatrix into a "local copy" within
-##              the environment of makeCacheMatrix, and also sets the inverse
-##              to NULL)
+##              the environment of makeCacheMatrix, which is the parent
+##              environment of the set function. It also sets the inverse, again
+##              in the makeCacheMatrix environment, to NULL. Note that the
+##              "deep assignment operator", or <<-, is used to store the copy
+##              within the parent environment. I found 
+##              http://adv-r.had.co.nz/Environments.html
+##              to be a useful reference to help explain how this worked.
 ##      get -- retrieves the "local copy" of the matrix
 ##      setinv -- this function is given the a matrice's inverse and stores a
-##              "local copy". It's called from within cacheSolve the first
+##              "local copy" in its parent environment (which is  
+##              makeCacheMatrix). It's called from within cacheSolve the first
 ##              time that the inverse is calculated.
 ##      getinv -- retrieves the "local copy" of the inverse.
 
